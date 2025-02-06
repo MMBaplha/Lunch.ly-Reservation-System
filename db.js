@@ -1,24 +1,41 @@
-// // Database connection setup for lunchly
-
-// const express = require("express");
 // const { Client } = require("pg");
 
-// const client = new Client({
-//     user: "mb34",
-//     host: "localhost", 
-//     database: "lunchly",
-//     password: "3473Heats@", 
-//     port: 5432, 
+// let DB_URI;
+
+// if(process.env.NODE_ENV === "test"){
+//     DB_URI = "lunchly_test";
+// } else {
+//     DB_URI = "lunchly";
+// }
+
+// const db = new Client({
+//   user: "mb34",
+//   password: "7334Heats@",  
+//   host: "localhost",
+//   port: 5432,
+//   database: DB_URI // return to "lunchly" if needed
 // });
 
-// client.connect()
-//     .then(() => console.log("Connected to the database"))
-//     .catch(err => console.error("Database connection error", err.stack));
-/** Database for lunchly */
+// db.connect()
+//   .then(() => console.log("Connected to the database"))
+//   .catch(err => console.error("Database connection error", err.stack));
 
-const pg = require("pg");
+// module.exports = db;
 
-const db = new pg.Client("postgresql:///lunchly");
+const { Client } = require("pg");
+
+let DB_URI;
+
+if(process.env.NODE_ENV === "test"){
+    DB_URI = "lunchly_test";
+} else {
+    DB_URI = "lunchly";
+}
+
+const db = new Client({
+    host :"/var/run/postgresql",
+    database: DB_URI 
+});
 
 db.connect();
 
