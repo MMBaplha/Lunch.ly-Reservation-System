@@ -1,5 +1,23 @@
 TO-DOS:
 
-FINISH USING GOOGLE DOCS TO START EXCERISE
+
 
 /etc/postgresql/16/main$
+
+
+* Read the slack overflow and learn the use cases of templating engine.
+
+Ask on can you run this without (anything else) using a template eninge.:
+mb34@Marz:~/GitHub_Project/Lunch.ly-Reservation-System$ nodemon
+[nodemon] 3.1.9
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node server.js`
+Listening on port 3000
+Error: Module "html" does not provide a view engine.
+    at new View (/home/mb34/GitHub_Project/Lunch.ly-Reservation-System/node_modules/express/lib/view.js:84:13)
+    at Function.render (/home/mb34/GitHub_Project/Lunch.ly-Reservation-System/node_modules/express/lib/application.js:587:12)
+    at ServerResponse.render (/home/mb34/GitHub_Project/Lunch.ly-Reservation-System/node_modules/express/lib/response.js:1049:7)
+    at /home/mb34/GitHub_Project/Lunch.ly-Reservation-System/routes.js:15:16
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
