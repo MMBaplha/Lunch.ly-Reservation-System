@@ -59,6 +59,12 @@ class Customer {
     return await Reservation.getReservationsForCustomer(this.id);
   }
 
+  // Get full name of customers
+  
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
   /** save this customer. */
 
   async save() {
