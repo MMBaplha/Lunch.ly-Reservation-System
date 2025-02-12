@@ -60,7 +60,7 @@ class Customer {
   }
 
   // Get full name of customers
-  
+
   get fullName() {
     return `${this.firstName} ${this.lastName}`;
   }
@@ -83,6 +83,39 @@ class Customer {
         [this.firstName, this.lastName, this.phone, this.notes, this.id]
       );
     }
+  }
+
+  /** Search customers by name (first or last) */
+
+  static async searchByName(name) {
+    const results = await db.query(
+      `SELECT id, first_name AS "firstName", last_name AS "lastName", phone, notes 
+      FROM customers
+      WHERE first_name ILIKE $1 OR last_name ILIKE $1
+      ORDER BY last_name, first_name`,
+      [`%${name}%`]
+    );
+    return results.rows.map(row => new Customer(row));
+  }
+
+  /** Find the top 10 customers with the most reservations */
+  
+  static async getBestCustomers() {
+    const results = await db.query(
+      `SELECT customers.id, customers.first_name, customers.last_name, COUNT(reservations.id) AS reservation_count
+      FROM customers
+      LEFT JOIN reservations ON customers.id = reservations.customer_id
+      GROUP BY customers.id
+      ORDER BY reservation_count DESC
+      LIMIT 10`
+    );
+
+    return results.rows.map(row => ({
+      id: row.id,
+      firstName: row.first_name,
+      lastName: row.last_name,
+      reservationCount: row.reservation_count
+    }));
   }
 }
 

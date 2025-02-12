@@ -112,4 +112,27 @@ router.post("/:id/add-reservation/", async function(req, res, next) {
   }
 });
 
+/** Search customers by name */
+
+router.get("/customers/search", async (req, res, next) => {
+  try {
+    const name = req.query.name;
+    const customers = await Customer.searchByName(name);
+    res.render("customer_list.html", { customers });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+/** Show top 10 best customers */
+
+router.get("/customers/best", async (req, res, next) => {
+  try {
+    const bestCustomers = await Customer.getBestCustomers();
+    res.render("best_customers.html", { bestCustomers });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
